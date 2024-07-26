@@ -1,55 +1,70 @@
 public class Carro {
+    private String nome;
+    private Boolean ligado;
+    private Boolean destruido;
+    private int blindagem;
+    private Boolean armamento;
 
-    private String marca;
-    private String modelName;
-
-    // Construtor
-    public Carro(String marca) {
-        this.marca = marca;
+    public Carro(String nome) {
+        this.nome = nome;
+        this.ligado = false;
+        this.destruido = false;
+        this.blindagem = 0;
+        this.armamento = false;
     }
 
-    // Getter para marca
-    public String getMarca() {
-        return this.marca;
+    public String getNome() {
+        return this.nome;
     }
 
-    // Setter para marca
-    public void setMarca(String marca) {
-        this.marca = marca;
+    public Boolean getLigado() {
+        return this.ligado;
     }
 
-    // Getter para modelName
-    public String getModelName() {
-        return this.modelName;
+    public void setLigado(Boolean ligado) {
+        this.ligado = ligado;
     }
 
-    // Setter para modelName
-    public void setModelName(String modelName) {
-        this.modelName = modelName;
+    public Boolean getDestruido() {
+        return this.destruido;
     }
 
-    // Classe interna Features
-    class Features extends Carro {
-        // Construtor
-        public Features(String marca, String modelName) {
-            super(marca); // herda do Carro a Marca.
-            setModelName(modelName); // Usando o setter para acessar o campo
+    public void setDestruido(Boolean destruido) {
+        this.destruido = destruido;
+    }
+
+    public Boolean getArmamento() {
+        return this.armamento;
+    }
+
+    public void setArmamento(Boolean armamento) {
+        this.armamento = armamento;
+    }
+
+    public int getBlindagem(){
+        return this.blindagem;
+    }
+
+    public void setBlindagem(int blindagem) {
+        this.blindagem = blindagem;
+    }
+
+    public void sofrerDano(int dano) {
+        this.blindagem -= dano;
+        if (this.blindagem <= 0) {
+            this.blindagem = 0;
+            this.ligado = false;
+            this.destruido=true;
         }
     }
 
-    public static void main(String[] args) {
-        // Exemplo 01 >>
-        Carro carro01 = new Carro("Volkswagen");
-
-        // Exemplo de uso da classe interna Features
-        Features featureCar = carro01.new Features("Volkswagen", "Golf");
-        System.out.println("Marca: " + featureCar.getMarca());
-        System.out.println("Modelo: " + featureCar.getModelName());
-
-        // Exemplo 02 >>
-        Carro carro02 = new Carro("FIAT");
-        Features featureCar_02 = carro02.new Features(carro02.getMarca(), "Palio");
-        System.out.println("Marca: " + featureCar_02.getMarca());
-        System.out.println("Modelo: " + featureCar_02.getModelName());
+    public void info() {
+        System.out.println("\n--------------------------");
+        System.out.printf("Nome ......:%s",this.nome);
+        System.out.printf("\nLigado ....:%s",this.ligado);
+        System.out.printf("\nDestruído .:%s",this.destruido);
+        System.out.printf("\nBlindagem .:%s",this.blindagem);
+        System.out.printf("\nArmemnto ..:%s",this.armamento);
     }
+
 }
